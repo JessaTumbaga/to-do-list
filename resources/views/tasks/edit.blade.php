@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Task</title>
+</head>
+<body>
+    <h1>Edit Task</h1>
+
+    <form action="{{ route('tasks.update', $task->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+
+        <label>Task Title:</label><br>
+        <input type="text" name="title" value="{{ $task->title }}" required><br><br>
+
+        <label>Description:</label><br>
+        <textarea name="description" rows="3">{{ $task->description }}</textarea><br><br>
+
+        <label>Status:</label><br>
+        <select name="status" required>
+            <option value="Pending" {{ $task->status == 'Pending' ? 'selected' : '' }}>Pending</option>
+            <option value="Completed" {{ $task->status == 'Completed' ? 'selected' : '' }}>Completed</option>
+        </select><br><br>
+
+        <label>Due Date:</label><br>
+        <input type="date" name="due_date" value="{{ $task->due_date }}"><br><br>
+
+        <button type="submit">Update Task</button>
+        <a href="{{ route('tasks.index') }}">Cancel</a>
+    </form>
+</body>
+</html>
